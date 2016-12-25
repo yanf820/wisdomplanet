@@ -21,7 +21,7 @@
 		<property name="dataCenterClient" ref="dataCenterClient" />
 		<property name="channelMapper" ref="channelMapper" />
 	</bean>
-	<bean id="dataCenterClient" class="org.wisdomplanet.service.datacenter.DataCenterClientDemo" />
+	<bean id="dataCenterClient" class="org.wisdomplanet.service.datacenter.storage.demo.DataCenterClientDemo" />
 	<bean id="channelMapper" class="org.wisdomplanet.service.transform.mapper.ChannelMapper" />
 	
 </beans>

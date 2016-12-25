@@ -34,7 +34,7 @@ public class App
             executeProcessArgs = new String[0];
         }
         
-        String executorType = System.getProperty("mx.processor.executorType", "flink");
+        String executorType = System.getProperty("mx.processor.executorType", "flink1");
 		
         SpringApplicationContextUtils.setContextId("wisdomplanet.xml");
 	    IComponentProvider componentProvider = new SpringComponentProvider();

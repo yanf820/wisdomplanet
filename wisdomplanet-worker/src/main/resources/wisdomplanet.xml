@@ -33,10 +33,18 @@
 	<!-- <import resource="classpath:wisdomplanet-datacenter.xml" /> -->
 	
 	<!-- BEAN -->
-	<bean id="datumProducer" class="org.wisdomplanet.worker.transform.EventDatumProducer" />
-		<!-- <property name="messageConsumer" ref="randomMessageConsumer"/> 
+	<!--<bean id="datumProducer" class="org.wisdomplanet.worker.transform.EventDatumProducer" />-->
+    <bean id="datumProducer" class="org.wisdomplanet.worker.simulation.KafkaEventDatumProducer">
+		<constructor-arg ref="dataCenterClient"/>
+        <!--<property name="dataCenterClient" ref="dataCenterClient"/>-->
+    </bean>
+		<!-- <property name="messageConsumer" ref="randomMessageConsumer"/>
 	</bean>-->
-	<bean id="transformProcess" class="org.wisdomplanet.worker.transform.TransformProcessor">
+	<!--<bean id="transformProcess" class="org.wisdomplanet.worker.transform.TransformProcessor">-->
+		<!--<constructor-arg ref="transformService" />-->
+		<!--<constructor-arg ref="transformContext" />-->
+	<!--</bean>-->
+	<bean id="transformProcess" class="org.wisdomplanet.worker.simulation.KafkaTransformProcessor">
 		<constructor-arg ref="transformService" />
 		<constructor-arg ref="transformContext" />
 	</bean>

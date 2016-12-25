@@ -2,13 +2,13 @@ package org.wisdomplanet.foundation.processor;
 
 
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wisdomplanet.foundation.processor.standalone.ProcessTask;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  */
@@ -96,6 +96,9 @@ public class BaseProcessor implements IProcessor {
         //NOOP
     }
 
+    /**
+     *
+     */
     protected boolean process(Object inputObject, IProcessInput input, IProcessOutput output) throws Exception{
         return false;
     }

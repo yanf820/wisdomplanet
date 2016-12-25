@@ -10,20 +10,16 @@
  */
 package org.wisdomplanet.service.transform;
 
+import org.wisdomplanet.model.*;
+import org.wisdomplanet.service.datacenter.storage.demo.DataCenterClientDemo;
+import org.wisdomplanet.service.provider.IEventObjectProvider;
+import org.wisdomplanet.service.transform.config.TransformContext;
+import org.wisdomplanet.service.transform.mapper.ChannelMapper;
+
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.wisdomplanet.model.Channel;
-import org.wisdomplanet.model.ChannelMapping;
-import org.wisdomplanet.model.EventDatum;
-import org.wisdomplanet.model.EventModel;
-import org.wisdomplanet.model.EventObject;
-import org.wisdomplanet.service.datacenter.DataCenterClientDemo;
-import org.wisdomplanet.service.provider.IEventObjectProvider;
-import org.wisdomplanet.service.transform.config.TransformContext;
-import org.wisdomplanet.service.transform.mapper.ChannelMapper;
 
 
 /**

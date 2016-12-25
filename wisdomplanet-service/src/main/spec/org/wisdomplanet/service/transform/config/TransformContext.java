@@ -10,7 +10,7 @@
  */
 package org.wisdomplanet.service.transform.config;
 
-import org.wisdomplanet.service.datacenter.DataCenterClientDemo;
+import org.wisdomplanet.service.datacenter.storage.demo.DataCenterClientDemo;
 import org.wisdomplanet.service.transform.mapper.ChannelMapper;
 
 /**

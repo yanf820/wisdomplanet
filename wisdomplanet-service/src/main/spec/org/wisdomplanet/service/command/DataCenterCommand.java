@@ -13,6 +13,7 @@ package org.wisdomplanet.service.command;
 import org.wisdomplanet.model.StructureDatum;
 
 /**
+ *
  * @ClassName: DataCenterCommand
  * @Description: TODO
  * @author: A.Z

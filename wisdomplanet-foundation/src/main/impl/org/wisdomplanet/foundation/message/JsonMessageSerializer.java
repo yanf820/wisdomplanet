@@ -1,9 +1,10 @@
 package org.wisdomplanet.foundation.message;
 
-import java.io.IOException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
+import java.io.IOException;
 
 /**
  */
@@ -14,7 +15,7 @@ public class JsonMessageSerializer implements IMessageSerializer {
     public JsonMessageSerializer() {
         this.objectMapper = new ObjectMapper();
         this.objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES , true);
-        this.objectMapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES , false);
+//        this.objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES , false);
     }
 
     @Override
@@ -26,4 +27,10 @@ public class JsonMessageSerializer implements IMessageSerializer {
     public <T> T deserialize(byte[] messageBytes, Class<T> messageType) throws IOException {
         return this.objectMapper.readValue(messageBytes, messageType);
     }
+
+    @Override
+    public JsonNode deserializeToJson(byte[] messageBytes) throws IOException {
+        return this.objectMapper.readTree(messageBytes);
+    }
+
 }
