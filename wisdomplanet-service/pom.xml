@@ -39,10 +39,5 @@
 			<artifactId>wisdomplanet-model</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>org.wisdomplanet.foundation</groupId>
-			<artifactId>wisdomplanet-foundation</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 </project>

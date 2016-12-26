@@ -1,15 +1,13 @@
 package org.wisdomplanet.foundation.message;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  */
@@ -63,10 +61,5 @@ public class RedisMessageConsumer implements IMessageConsumer, Serializable {
 
         resource.close();
         return list;
-    }
-
-    @Override
-    public List<JsonNode> receiveJson(MessageTopic topic, int size) throws IOException {
-        return null;
     }
 }

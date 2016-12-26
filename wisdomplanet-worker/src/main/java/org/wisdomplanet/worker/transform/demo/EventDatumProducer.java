@@ -1,4 +1,4 @@
-package org.wisdomplanet.worker.transform;
+package org.wisdomplanet.worker.transform.demo;
 
 import java.sql.Timestamp;
 import java.util.HashMap;

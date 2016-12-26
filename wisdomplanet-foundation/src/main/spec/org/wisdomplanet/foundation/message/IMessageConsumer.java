@@ -10,10 +10,6 @@
  */
 package org.wisdomplanet.foundation.message;
 
-
-import com.fasterxml.jackson.databind.JsonNode;
-
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,7 +23,5 @@ public interface IMessageConsumer {
     public void setSerializer(IMessageSerializer serializer);
 
     public <T> List<T> receive(MessageTopic topic, Class<T> messageType, int size) throws Exception;
-
-    public List<JsonNode> receiveJson(MessageTopic topic, int size) throws IOException;
 
 }

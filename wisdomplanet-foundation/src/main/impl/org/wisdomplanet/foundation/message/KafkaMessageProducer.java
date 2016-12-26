@@ -1,12 +1,13 @@
 package org.wisdomplanet.foundation.message;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
+import com.google.common.primitives.Longs;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  */
@@ -14,7 +15,7 @@ public class KafkaMessageProducer implements IMessageProducer {
 
     private IMessageSerializer serializer;
     private String brokerList;
-    private Producer<Long, byte[]> producer;
+    private Producer<byte[], byte[]> producer;
     private long messageKeyIndex;
 
     public String getBrokerList() {
@@ -33,7 +34,7 @@ public class KafkaMessageProducer implements IMessageProducer {
 
         this.messageKeyIndex = 0L;
         ProducerConfig config = new ProducerConfig(properties);
-        this.producer = new Producer<Long, byte[]>(config);
+        this.producer = new Producer<byte[], byte[]>(config);
     }
 
     @Override
@@ -44,12 +45,12 @@ public class KafkaMessageProducer implements IMessageProducer {
     @Override
     public void send(MessageTopic topic, Object... messages) throws Exception {
         if(messages == null || messages.length == 0) return;
-        List<KeyedMessage<Long, byte[]>> msgs = new ArrayList<KeyedMessage<Long, byte[]>>(messages.length);
+        List<KeyedMessage<byte[], byte[]>> msgs = new ArrayList<KeyedMessage<byte[], byte[]>>(messages.length);
         if(messages!=null) for(Object message : messages) {
             byte[] messageBody = this.serializer.serialize(message);
             long key = this.messageKeyIndex++;
             if(this.messageKeyIndex >= Long.MAX_VALUE) this.messageKeyIndex = 0L;
-            KeyedMessage<Long, byte[]> msg = new KeyedMessage<Long, byte[]>(topic.getTopicName(), key, messageBody);
+            KeyedMessage<byte[], byte[]> msg = new KeyedMessage<byte[], byte[]>(topic.getTopicName(), Longs.toByteArray(key), messageBody);
             msgs.add(msg);
         }
         this.producer.send(msgs);

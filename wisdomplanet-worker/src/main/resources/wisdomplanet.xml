@@ -33,23 +33,53 @@
 	<!-- <import resource="classpath:wisdomplanet-datacenter.xml" /> -->
 	
 	<!-- BEAN -->
-	<!--<bean id="datumProducer" class="org.wisdomplanet.worker.transform.EventDatumProducer" />-->
-    <bean id="datumProducer" class="org.wisdomplanet.worker.simulation.KafkaEventDatumProducer">
-		<constructor-arg ref="dataCenterClient"/>
-        <!--<property name="dataCenterClient" ref="dataCenterClient"/>-->
-    </bean>
-		<!-- <property name="messageConsumer" ref="randomMessageConsumer"/>
+	<!--<bean id="datumProducer" class="org.wisdomplanet.foundation.processor.MessageReceiveProducer"/>-->
+	<bean id="datumProducer" class="org.wisdomplanet.worker.transform.message.EventDatumMessageProducer">
+		<property name="messageConsumer" ref="kafkaConsumer"/>
+		<property name="topicName" value="im"/>
+		<property name="batchSize" value="1"/>
+		<property name="messageClass" value="org.wisdomplanet.model.EventDatum"/>
+		<!--<property name="messageClass" value="java.lang.String"/>-->
+	</bean>
+		<!-- <property name="messageConsumer" ref="randomMessageConsumer"/> 
 	</bean>-->
-	<!--<bean id="transformProcess" class="org.wisdomplanet.worker.transform.TransformProcessor">-->
+	<!--<bean id="transformProcess" class="org.wisdomplanet.worker.transform.demo.TransformProcessor">-->
 		<!--<constructor-arg ref="transformService" />-->
 		<!--<constructor-arg ref="transformContext" />-->
 	<!--</bean>-->
-	<bean id="transformProcess" class="org.wisdomplanet.worker.simulation.KafkaTransformProcessor">
-		<constructor-arg ref="transformService" />
-		<constructor-arg ref="transformContext" />
+
+    <bean id="transformProcess" class="org.wisdomplanet.worker.transform.message.MessageTransformProcessor">
+        <constructor-arg ref="transformService" />
+        <constructor-arg ref="transformContext" />
+    </bean>
+
+	<!--<bean id="datumConsumer" class="org.wisdomplanet.worker.transform.demo.EventObjectConsumer" >-->
+		<!--&lt;!&ndash; <constructor-arg ref="dataCenterManager"/> &ndash;&gt; -->
+	<!--</bean>-->
+    <bean id="datumConsumer" class="org.wisdomplanet.worker.transform.message.EventObjectMessageConsumer">
+        <property name="messageProducer" ref="kafkaProducer"/>
+        <property name="topicName" value="yan"/>
+    </bean>
+
+
+	<bean id="jsonSerializer" class="org.wisdomplanet.foundation.message.JsonMessageSerializer"/>
+
+	<!--<bean id="kafkaConsumer" class="org.wisdomplanet.foundation.message.KafkaMessageConsumer" init-method="__init__">-->
+		<!--<property name="serializer" ref="jsonSerializer"/>-->
+		<!--<property name="connectList" value="10.1.34.216:2181"/>-->
+		<!--<property name="groupId" value="login"/>-->
+	<!--</bean>-->
+
+	<bean id="kafkaConsumer" class="org.wisdomplanet.worker.transform.message.KafkaMessageConsumerNew" init-method="__init__">
+		<property name="serializer" ref="jsonSerializer"/>
+		<property name="connectList" value="192.168.110.128:9092"/>
+		<property name="groupId" value="login"/>
 	</bean>
-	<bean id="datumConsumer" class="org.wisdomplanet.worker.transform.EventObjectConsumer" >
-		<!-- <constructor-arg ref="dataCenterManager"/> --> 
+
+	<bean id="kafkaProducer" class="org.wisdomplanet.foundation.message.KafkaMessageProducer" init-method="__init__">
+		<property name="serializer" ref="jsonSerializer"/>
+        <!--<property name="brokerList" value="10.1.34.215:9092,10.1.34.217:9092"/>-->
+		<property name="brokerList" value="192.168.110.128:9092"/>
 	</bean>
-	
+
 </beans>
